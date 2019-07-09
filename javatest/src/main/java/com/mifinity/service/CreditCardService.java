@@ -1,6 +1,11 @@
 package com.mifinity.service;
 
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.mifinity.dao.CreditCardDaoImpl;
 import com.mifinity.model.CreditCard;
@@ -13,43 +18,60 @@ public class CreditCardService {
         dao = new CreditCardDaoImpl();
     }
  
-    public void persist(CreditCard entity) {
-        dao.openCurrentSessionwithTransaction();
+    public void persist(CreditCard entity) throws Exception {
+    	validateData(entity);
         dao.persist(entity);
-        dao.closeCurrentSessionwithTransaction();
     }
  
-    public void update(CreditCard entity) {
-        dao.openCurrentSessionwithTransaction();
-        dao.update(entity);
-        dao.closeCurrentSessionwithTransaction();
+    private void validateData(CreditCard entity) throws Exception {
+    	if (!NumberUtils.isDigits(entity.getCardNumber()) || isInvalidExpityDate(entity.getExpiryDate())) {
+    		throw new Exception("Invalid data.");
+    	}
+	}
+
+	private boolean isInvalidExpityDate(String expiryDate) {
+		if (StringUtils.isEmpty(expiryDate)) {
+			return true;
+		}
+		String[] expiry = expiryDate.split("/");
+		if (expiry.length != 2) {
+			return true;
+		}
+		
+		
+		try {
+			YearMonth yearMonth = YearMonth.parse("20"+ expiry[0] + "-" + expiry[1]);
+			if (yearMonth != null) {
+				return false;
+			}
+		} catch(DateTimeParseException timeException) {
+			return true;
+		}
+
+		return true;
+	}
+
+	public void update(CreditCard entity) {
+    	dao.update(entity);
     }
  
     public CreditCard findById(String id) {
-        dao.openCurrentSession();
         CreditCard book = dao.findById(id);
-        dao.closeCurrentSession();
         return book;
     }
  
     public void delete(String id) {
-        dao.openCurrentSessionwithTransaction();
         CreditCard book = dao.findById(id);
         dao.delete(book);
-        dao.closeCurrentSessionwithTransaction();
     }
  
     public List<CreditCard> findAll() {
-        dao.openCurrentSession();
         List<CreditCard> books = dao.findAll();
-        dao.closeCurrentSession();
         return books;
     }
  
     public void deleteAll() {
-        dao.openCurrentSessionwithTransaction();
         dao.deleteAll();
-        dao.closeCurrentSessionwithTransaction();
     }
  
     public CreditCardDaoImpl creditCardDaoImpl() {

@@ -56,12 +56,13 @@ span.psw {
 <body>
 
 
-<form action="/action_page.php">
+<form action="/javatest/signin" method="post">
   <div class="container">
 	<h2>Login Form</h2>
 
+	<div id="msg"></div>
     <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <input type="text" placeholder="Enter Username" name="username" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
@@ -75,4 +76,20 @@ span.psw {
 </form>
 
 </body>
+<script>
+document.onreadystatechange = function() {
+    if (document.readyState === "complete") {
+		var url = new URL(window.location.href);
+		var result = url.searchParams.get("r");
+		if (result && result === "fail") {
+			document.getElementById("msg").append("Error: Try again!!! Username must be unique.");
+			document.getElementById("msg").appendChild(document.createElement("br"));
+		}
+		if (result && result === "notfound") {
+			document.getElementById("msg").append("Username and/or password doesn't match.");
+			document.getElementById("msg").appendChild(document.createElement("br"));
+		}
+    } 
+}
+</script>
 </html>

@@ -55,4 +55,11 @@ public class UserService {
     public UserDaoImpl userDaoImpl() {
         return dao;
     }
+
+	public User authenticate(User user) {
+		dao.openCurrentSession();
+		User u = dao.authenticate(user);
+		dao.closeCurrentSession();
+		return u;
+	}
 }

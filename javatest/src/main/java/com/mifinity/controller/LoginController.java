@@ -2,38 +2,47 @@ package com.mifinity.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class UserController
- */
+import com.mifinity.model.User;
+import com.mifinity.service.UserService;
+
+@WebServlet("/signin")
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 4616121606191466715L;
 
-	/**
-     * Default constructor. 
-     */
+	private UserService userService;
+	
     public LoginController() {
-        // TODO Auto-generated constructor stub
+    	super();
+    	userService = new UserService();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		User user = new User();
+		user.setUsername(request.getParameter("username"));
+		user.setPassword(request.getParameter("psw"));
+		try {
+			User authUser = userService.authenticate(user);
+
+			if (authUser == null) {
+				response.sendRedirect("/javatest/login/index.html?r=notfound");
+			} else {
+				RequestDispatcher view = request.getRequestDispatcher("/creditcard/");
+				view.forward(request, response);  				
+			}
+		} catch (Exception e) {
+			response.sendRedirect("/javatest/login/index.html?r=fail");
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

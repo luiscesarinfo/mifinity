@@ -15,7 +15,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	@Column
+	@Column(unique=true)
 	private String username;
 	@Column
 	private String password;

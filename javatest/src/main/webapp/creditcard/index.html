@@ -2,93 +2,136 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: black;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 8px;
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* Add padding to containers */
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
 .container {
-  padding: 16px;
-  background-color: white;
+  background-color: #f2f2f2;
+  padding: 5px 25% 15px 25%;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
 }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text] {
   width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
+label {
+  margin-bottom: 10px;
+  display: block;
 }
 
-/* Overwrite default styles of hr */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
 
-/* Set a style for the submit button */
-.savebtn {
+button {
   background-color: #4CAF50;
   color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
+  padding: 12px;
+  margin: 10px 0;
   border: none;
-  cursor: pointer;
   width: 100%;
-  opacity: 0.9;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
 }
 
-.savebtn:hover {
-  opacity: 1;
+button:hover {
+  background-color: #45a049;
 }
 
-/* Add a blue text color to links */
 a {
-  color: dodgerblue;
+  color: #2196F3;
 }
 
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-  background-color: #f1f1f1;
-  text-align: center;
+hr {
+  border: 1px solid lightgrey;
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
 }
 </style>
 </head>
 <body>
 
-<form action="/action_page.php">
-  <div class="container">
-    <h1>Credit card creation</h1>
-    <p>Please fill in this form to create a credit card.</p>
-    <hr>
+<h2>Credit Card</h2>
 
-    <label for="cardholder"><b>Cardholder name</b></label>
-    <input type="text" placeholder="Enter Cardholder name" name="cardholder" required>
-
-    <label for="cardnumber"><b>Card number</b></label>
-    <input type="number" placeholder="Enter card number" name="cardnumber" required>
-
-    <label for="expiry-date"><b>Expiry date</b></label>
-    <input type="date" placeholder="Enter expiry date" name="expiry-date" required>
-    <hr>
-
-    <button type="submit" class="savebtn">Register</button>
+<div class="row">
+  <div class="col-75">
+    <div class="container">
+      <form action="/javatest/ccard" method="post">
+		<div id="msg"></div>      
+        <div class="row">
+          <div class="col-50">
+            <label for="cardholder">Cardholder</label>
+            <input type="text" id="cardholder" name="cardholder" placeholder="John More Doe" maxlength="60" required>
+            <label for="cardnumber">Credit card number</label>
+            <input type="text" id="cardnumber" name="cardnumber" placeholder="1111 2222 3333 4444" minlength="16" maxlength="16" required>
+            <label for="expirydate">Expiry Date</label>
+            <input type="text" id="expirydate" name="expirydate" placeholder="YY/MM" minlength="5" maxlength="5" required>
+          </div>
+          
+        </div>
+        <button type="submit" class="savebtn">Save</button>
+      </form>
+    </div>
   </div>
-  
-</form>
+</div>
 
 </body>
+<script>
+document.onreadystatechange = function() {
+    if (document.readyState === "complete") {
+		var url = new URL(window.location.href);
+		var result = url.searchParams.get("r");
+		if (result && result === "fail") {
+			document.getElementById("msg").append("Error: Try again!!! Please note the following requirements:");
+			document.getElementById("msg").appendChild(document.createElement("br")); 
+			document.getElementById("msg").append("- Card number must have 16 digits and number only.");
+			document.getElementById("msg").appendChild(document.createElement("br"));
+			document.getElementById("msg").append("- Expiry date must have be in the YY/MM format.");
+			document.getElementById("msg").appendChild(document.createElement("br"));
+		}
+    } 
+}
+</script>
 </html>

@@ -2,6 +2,7 @@ package com.mifinity.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,13 @@ public class SignUpController extends HttpServlet {
 		newUser.setUsername(request.getParameter("username"));
 		newUser.setPassword(request.getParameter("psw"));
 		
-		userService.persist(newUser);
+		try {
+			userService.persist(newUser);
+			RequestDispatcher view = request.getRequestDispatcher("/login/");
+			view.forward(request, response);  				
+		} catch (Exception e) {
+			response.sendRedirect("/javatest/registration/index.html?r=fail");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,39 +1,44 @@
 package com.mifinity.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class CreditCardController
- */
+import com.mifinity.model.CreditCard;
+import com.mifinity.service.CreditCardService;
+
+@WebServlet("/ccard")
 public class CreditCardController extends HttpServlet {
        
 	private static final long serialVersionUID = 1111087078551487176L;
 
-	/**
-     * @see HttpServlet#HttpServlet()
-     */
+	private CreditCardService service;
     public CreditCardController() {
         super();
-        // TODO Auto-generated constructor stub
+        service = new CreditCardService();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		CreditCard creditCard = new CreditCard();
+		creditCard.setCardNumber(request.getParameter("cardholder"));
+		creditCard.setCardNumber(request.getParameter("cardnumber"));
+		creditCard.setExpiryDate(request.getParameter("expirydate"));
+		
+		try {
+			service.persist(creditCard);
+			RequestDispatcher view = request.getRequestDispatcher("/creditcard/");
+			view.forward(request, response);  				
+		} catch (Exception e) {
+			response.sendRedirect("/javatest/creditcard/index.html?r=fail");
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

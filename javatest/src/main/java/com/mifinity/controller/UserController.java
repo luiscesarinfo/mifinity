@@ -7,16 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mifinity.service.UserService;
-
 public class UserController extends HttpServlet {
 
 	private static final long serialVersionUID = -2857201859397059792L;
 	
-	private UserService userService;
-
     public UserController() {
-    	userService = new UserService();
+    	super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

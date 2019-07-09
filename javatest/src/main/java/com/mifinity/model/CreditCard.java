@@ -1,7 +1,5 @@
 package com.mifinity.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +12,11 @@ public class CreditCard {
 	@GeneratedValue
 	private Long id;
 	@Column
+	private String cardHolder;
+	@Column(unique=true)
 	private String cardNumber;
 	@Column
-	private LocalDate expiryDate;
+	private String expiryDate;
 
 	public Long getId() {
 		return id;
@@ -24,16 +24,22 @@ public class CreditCard {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public String getCardHolder() {
+		return cardHolder;
+	}
+	public void setCardHolder(String cardHolder) {
+		this.cardHolder = cardHolder;
+	}
 	public String getCardNumber() {
 		return cardNumber;
 	}
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
-	public LocalDate getExpiryDate() {
+	public String getExpiryDate() {
 		return expiryDate;
 	}
-	public void setExpiryDate(LocalDate expiryDate) {
+	public void setExpiryDate(String expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 	
