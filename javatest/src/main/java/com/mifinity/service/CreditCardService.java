@@ -3,7 +3,7 @@ package com.mifinity.service;
 import java.util.List;
 
 import com.mifinity.dao.CreditCardDaoImpl;
-import com.mifinity.domain.CreditCard;
+import com.mifinity.model.CreditCard;
 
 public class CreditCardService {
 

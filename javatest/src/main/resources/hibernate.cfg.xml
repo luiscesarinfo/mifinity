@@ -9,8 +9,9 @@
         <property name="connection.url">jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</property>
         <property name="dialect">org.hibernate.dialect.H2Dialect</property>
         <property name="show_sql">true</property>
-        <property name="hbm2ddl.auto">create</property>
-        <mapping class="com.mifinity.domain.User"/>
-        <mapping class="com.mifinity.domain.CreditCard"/>
+        <property name="hbm2ddl.auto">create-drop</property>
+
+        <mapping class="com.mifinity.model.User"/>
+        <mapping class="com.mifinity.model.CreditCard"/>
     </session-factory>
 </hibernate-configuration>

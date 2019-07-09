@@ -3,7 +3,7 @@ package com.mifinity.service;
 import java.util.List;
 
 import com.mifinity.dao.UserDaoImpl;
-import com.mifinity.domain.User;
+import com.mifinity.model.User;
 
 public class UserService {
 

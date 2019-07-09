@@ -1,4 +1,4 @@
-package com.mifinity.domain;
+package com.mifinity.model;
 
 import java.time.LocalDate;
 

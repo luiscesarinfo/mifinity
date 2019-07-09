@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>com.mifinity.controller.CreditCardController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>SignUpController</servlet-name>
+  	<display-name>SignUpController</display-name>
+  	<description></description>
+  	<servlet-class>com.mifinity.controller.SignUpController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>UserController</servlet-name>
   	<url-pattern>/UserController</url-pattern>
@@ -23,5 +29,9 @@
   <servlet-mapping>
   	<servlet-name>CreditCardController</servlet-name>
   	<url-pattern>/CreditCardController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SignUpController</servlet-name>
+  	<url-pattern>/SignUpController</url-pattern>
   </servlet-mapping>
 </web-app>

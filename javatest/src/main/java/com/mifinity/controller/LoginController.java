@@ -7,23 +7,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mifinity.service.UserService;
+/**
+ * Servlet implementation class UserController
+ */
+public class LoginController extends HttpServlet {
 
-public class UserController extends HttpServlet {
+	private static final long serialVersionUID = 4616121606191466715L;
 
-	private static final long serialVersionUID = -2857201859397059792L;
-	
-	private UserService userService;
-
-    public UserController() {
-    	userService = new UserService();
+	/**
+     * Default constructor. 
+     */
+    public LoginController() {
+        // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

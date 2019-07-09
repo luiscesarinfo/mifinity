@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class CreditCardController
  */
 public class CreditCardController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
        
-    /**
+	private static final long serialVersionUID = 1111087078551487176L;
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public CreditCardController() {
