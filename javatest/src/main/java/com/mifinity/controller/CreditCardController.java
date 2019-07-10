@@ -33,8 +33,7 @@ public class CreditCardController extends HttpServlet {
 		try {
 			service.persist(creditCard);
 
-			RequestDispatcher view = request.getRequestDispatcher("creditcardlist");
-			view.forward(request, response);  				
+			response.sendRedirect(request.getContextPath()+ "/creditcardlist");
 		} catch (Exception e) {
 			response.sendRedirect("/javatest/creditcard/index.html?r=fail");
 		}

@@ -70,7 +70,12 @@ public class CreditCardService {
         return cards;
     }
  
-    public void deleteAll() {
+    public List<CreditCard> findByCreditCardNumber() {
+    	List<CreditCard> cards = dao.findAll();
+    	return cards;
+    }
+
+	public void deleteAll() {
         dao.deleteAll();
     }
  

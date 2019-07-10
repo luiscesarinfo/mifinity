@@ -2,7 +2,6 @@ package com.mifinity.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +30,7 @@ public class SignUpController extends HttpServlet {
 		
 		try {
 			userService.persist(newUser);
-			RequestDispatcher view = request.getRequestDispatcher("/login/");
-			view.forward(request, response);  				
+			response.sendRedirect(request.getContextPath()+ "/login");
 		} catch (Exception e) {
 			response.sendRedirect("/javatest/registration/index.html?r=fail");
 		}

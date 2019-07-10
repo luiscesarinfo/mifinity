@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.mifinity.model.CreditCard;
 import com.mifinity.service.CreditCardService;
 
@@ -26,10 +28,16 @@ public class CreditCardListController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CreditCard> cards = creditCardService.findAll();
-		request.setAttribute("cardsList", cards);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/creditcard/creditcardlist.jsp");
-		dispatcher.forward(request,response);
+		String search = request.getParameter("search");
+		StringUtils.isEmpty(search) {
+			List<CreditCard> cards = creditCardService.findAll();
+			request.setAttribute("cardsList", cards);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/creditcard/creditcardlist.jsp");
+			dispatcher.forward(request,response);
+		} else {
+			
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
