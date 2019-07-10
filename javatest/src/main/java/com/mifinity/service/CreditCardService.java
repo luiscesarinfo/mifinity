@@ -56,18 +56,18 @@ public class CreditCardService {
     }
  
     public CreditCard findById(String id) {
-        CreditCard book = dao.findById(id);
-        return book;
+        CreditCard card = dao.findById(id);
+        return card;
     }
  
     public void delete(String id) {
-        CreditCard book = dao.findById(id);
-        dao.delete(book);
+        CreditCard card = dao.findById(id);
+        dao.delete(card);
     }
  
     public List<CreditCard> findAll() {
-        List<CreditCard> books = dao.findAll();
-        return books;
+        List<CreditCard> cards = dao.findAll();
+        return cards;
     }
  
     public void deleteAll() {

@@ -1,32 +1,30 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+   http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+   
   <display-name>Archetype Created Web Application</display-name>
+
   <servlet>
   	<servlet-name>UserController</servlet-name>
-  	<display-name>UserController</display-name>
-  	<description></description>
   	<servlet-class>com.mifinity.controller.UserController</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>CreditCardController</servlet-name>
-  	<display-name>CreditCardController</display-name>
-  	<description></description>
   	<servlet-class>com.mifinity.controller.CreditCardController</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>SignUpController</servlet-name>
-  	<display-name>SignUpController</display-name>
-  	<description></description>
   	<servlet-class>com.mifinity.controller.SignUpController</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>LoginController</servlet-name>
-  	<display-name>LoginController</display-name>
-  	<description></description>
   	<servlet-class>com.mifinity.controller.LoginController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CreditCardListController</servlet-name>
+  	<servlet-class>com.mifinity.controller.CreditCardListController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>UserController</servlet-name>
@@ -39,5 +37,9 @@
   <servlet-mapping>
   	<servlet-name>SignUpController</servlet-name>
   	<url-pattern>/SignUpController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CreditCardListController</servlet-name>
+  	<url-pattern>/CreditCardListController</url-pattern>
   </servlet-mapping>
 </web-app>

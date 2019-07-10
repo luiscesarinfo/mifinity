@@ -12,26 +12,28 @@ import javax.servlet.http.HttpServletResponse;
 import com.mifinity.model.CreditCard;
 import com.mifinity.service.CreditCardService;
 
-@WebServlet("/ccard")
+@WebServlet(name="ccard", urlPatterns="/ccard")
 public class CreditCardController extends HttpServlet {
        
 	private static final long serialVersionUID = 1111087078551487176L;
 
 	private CreditCardService service;
-    public CreditCardController() {
+
+	public CreditCardController() {
         super();
         service = new CreditCardService();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CreditCard creditCard = new CreditCard();
-		creditCard.setCardNumber(request.getParameter("cardholder"));
+		creditCard.setCardHolder(request.getParameter("cardholder"));
 		creditCard.setCardNumber(request.getParameter("cardnumber"));
 		creditCard.setExpiryDate(request.getParameter("expirydate"));
 		
 		try {
 			service.persist(creditCard);
-			RequestDispatcher view = request.getRequestDispatcher("/creditcard/");
+
+			RequestDispatcher view = request.getRequestDispatcher("creditcardlist");
 			view.forward(request, response);  				
 		} catch (Exception e) {
 			response.sendRedirect("/javatest/creditcard/index.html?r=fail");
