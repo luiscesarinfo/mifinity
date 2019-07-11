@@ -28,7 +28,7 @@ public class SignUpController extends HttpServlet {
 		User newUser = new User();
 		newUser.setUsername(request.getParameter("username"));
 		newUser.setPassword(request.getParameter("psw"));
-		newUser.setUserRole(UserRole.valueOf(request.getParameter("role")));
+		newUser.setUserRole(UserRole.valueOf(request.getParameter("role").toUpperCase()));
 		
 		try {
 			userService.persist(newUser);

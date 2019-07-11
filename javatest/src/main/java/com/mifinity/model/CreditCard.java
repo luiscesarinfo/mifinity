@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class CreditCard implements Serializable {
@@ -21,7 +23,8 @@ public class CreditCard implements Serializable {
 	private String cardNumber;
 	@Column
 	private String expiryDate;
-	@Column
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
 	private User user;
 
 	public Long getId() {

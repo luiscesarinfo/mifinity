@@ -75,11 +75,12 @@ button:hover {
 </head>
 <body>
 
-<h2>Credit Card list</h2>
- <div style="background-color:#f1f1f1">
-   <button type="button" class="signoutbtn" onclick="window.location='/javatest/signout/';">Sign Out</button>
- </div>
+<div align="right">
+  ${sessionScope.currentUser.username }
+  <button type="button" class="signoutbtn" onclick="window.location='/javatest/signout';">Sign Out</button>
+</div>
 
+<h2>Credit Card list</h2>
 
 <button type="button" class="newbtn" onclick="window.location='/javatest/creditcard/card.jsp';">New Credit Card</button>
 <input type="number" id="searchbox" name="searchbox" placeholder="Enter part or the whole number of the credit card" min="0" onKeyPress="if(this.value.length==16) return false;">
@@ -101,8 +102,8 @@ button:hover {
         <td>${card.cardNumber}</td>
         <td>${card.expiryDate}</td>
         <td>
-			<button type="button" class="editbtn" onclick="edit(${card.id})">Edit</button>
-			<button type="button" class="deletebtn" onclick="deleteCard(${card.id})">Delete</button>
+          <button type="button" class="editbtn" onclick="edit(${card.id})">Edit</button>
+          <button type="button" class="deletebtn" onclick="deleteCard(${card.id})">Delete</button>
         </td>
       </tr>
     </c:forEach>  

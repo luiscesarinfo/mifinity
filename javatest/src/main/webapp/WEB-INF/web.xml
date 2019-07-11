@@ -41,10 +41,6 @@
   	<servlet-class>com.mifinity.controller.SignOutController</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserController</servlet-name>
-  	<url-pattern>/UserController</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
   	<servlet-name>CreditCardController</servlet-name>
   	<url-pattern>/CreditCardController</url-pattern>
   </servlet-mapping>

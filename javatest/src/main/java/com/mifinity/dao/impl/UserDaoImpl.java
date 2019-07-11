@@ -35,10 +35,14 @@ public class UserDaoImpl extends Dao implements UserDao<User, Long> {
 
     @SuppressWarnings("unchecked")
     public User authenticate(User user) {
-		Query<User> query= getCurrentSession().createQuery("from User where username=:username and password=:password");
+    	openCurrentSession();
+
+    	Query<User> query= getCurrentSession().createQuery("from User where username=:username and password=:password");
     	query.setParameter("username", user.getUsername());
     	query.setParameter("password", user.getPassword());
     	User u = (User) query.uniqueResult();
+
+    	closeCurrentSession();
     	
     	return u; 
     }

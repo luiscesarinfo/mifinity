@@ -2,6 +2,7 @@ package com.mifinity.service;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +10,8 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import com.mifinity.dao.impl.CreditCardDaoImpl;
 import com.mifinity.model.CreditCard;
+import com.mifinity.model.User;
+import com.mifinity.model.UserRole;
 
 public class CreditCardService {
 
@@ -59,8 +62,10 @@ public class CreditCardService {
 		return true;
 	}
 
-	public void update(CreditCard entity) {
-    	dao.update(entity);
+	public void update(CreditCard creditCard) {
+		CreditCard entity = findById(creditCard.getId());
+		creditCard.setUser(entity.getUser());
+    	dao.update(creditCard);
     }
  
     public CreditCard findById(Long id) {
@@ -73,13 +78,24 @@ public class CreditCardService {
         dao.delete(card);
     }
  
-    public List<CreditCard> findAll() {
-        List<CreditCard> cards = dao.findAll();
-        return cards;
+    public List<CreditCard> findByUser(User currentUser) {
+    	List<CreditCard> cards = new ArrayList<CreditCard>();
+    	if (currentUser.getUserRole() == UserRole.ADMIN) {
+    		cards = dao.findAll();
+    	} else {
+    		cards = dao.findByUser(currentUser.getId());
+    	}
+
+    	return cards;
     }
  
-    public List<CreditCard> findByCardNumber(String cardNumber) {
-    	List<CreditCard> cards = dao.findByCardNumber(cardNumber);
+    public List<CreditCard> findByCardNumber(String cardNumber, User currentUser) {
+    	List<CreditCard> cards = new ArrayList<CreditCard>();
+    	if (currentUser.getUserRole() == UserRole.ADMIN) {
+    		cards = dao.findByCardNumber(cardNumber);
+    	} else {
+    		cards = dao.findByCardNumberAndUser(cardNumber, currentUser.getId());
+    	}
     	return cards;
     }
 

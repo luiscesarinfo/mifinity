@@ -2,6 +2,7 @@ package com.mifinity.controller;
 
 import java.io.IOException;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +24,16 @@ public class EditCreditCard extends Controller {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cardId = request.getParameter("id");
-		CreditCard card = creditCardService.findById(Long.parseLong(cardId));
-		request.setAttribute("card", card);
-		getServletContext().getRequestDispatcher("/creditcard/card.jsp").forward(request,response);
+		try {
+			validateSession(request, response);
+			
+			String cardId = request.getParameter("id");
+			CreditCard card = creditCardService.findById(Long.parseLong(cardId));
+			request.setAttribute("card", card);
+			getServletContext().getRequestDispatcher("/creditcard/card.jsp").forward(request,response);
+		} catch (AuthenticationException e) {
+			response.sendRedirect(request.getContextPath()+ "/login");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

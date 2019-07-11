@@ -43,6 +43,7 @@ body {
   padding: 5px 25% 15px 25%;
   border: 1px solid lightgrey;
   border-radius: 3px;
+  height: 350px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -67,7 +68,6 @@ label {
 
 
 button {
-  background-color: #4CAF50;
   color: white;
   padding: 12px;
   margin: 10px 0;
@@ -78,13 +78,18 @@ button {
   font-size: 17px;
 }
 
-button:hover {
-  background-color: #45a049;
+.savebtn {
+  background-color: #4CAF50;
 }
 
-a {
-  color: #2196F3;
+.cancelbtn {
+  background-color: #f44336;
 }
+
+button:hover {
+  opacity: 0.8;
+}
+
 
 hr {
   border: 1px solid lightgrey;
@@ -112,15 +117,16 @@ hr {
           <div class="col-50">
           	<input type="hidden" id="id" name="id" value="${card.id }">
             <label for="cardholder">Cardholder</label>
-            <input type="text" id="cardholder" name="cardholder" placeholder="John More Doe" value="${card.cardHolder }" maxlength="60" required>
+            <input type="text" id="cardholder" name="cardholder" placeholder="John More Doe" value="${card.cardHolder }" <c:if test="${not empty card.id}">readonly</c:if> maxlength="60" required>
             <label for="cardnumber">Credit card number</label>
-            <input type="number" id="cardnumber" name="cardnumber" placeholder="1111 2222 3333 4444" value="${card.cardNumber }" min="0" onKeyPress="if(this.value.length==16) return false;" required>
+            <input type="number" id="cardnumber" name="cardnumber" placeholder="1111 2222 3333 4444" value="${card.cardNumber }" <c:if test="${not empty card.id}">readonly</c:if> min="0" onKeyPress="if(this.value.length==16) return false;" required>
             <label for="expirydate">Expiry Date</label>
             <input type="text" id="expirydate" name="expirydate" placeholder="YY/MM" minlength="5" value="${card.expiryDate }" maxlength="5" required>
           </div>
           
         </div>
-        <button type="submit" class="savebtn">Save</button>
+        <button type="submit" class="savebtn" style="float:left; display: inline; width: 49%;">Save</button>
+        <button type="button" class="cancelbtn" style="float:right; display: inline; width: 49%;" onclick="window.location='/javatest/creditcardlist';">Cancel</button>
       </form>
     </div>
   </div>

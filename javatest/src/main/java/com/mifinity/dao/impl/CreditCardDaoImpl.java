@@ -2,7 +2,10 @@ package com.mifinity.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 
 import com.mifinity.dao.CreditCardDao;
 import com.mifinity.model.CreditCard;
@@ -55,8 +58,38 @@ public class CreditCardDaoImpl extends Dao implements CreditCardDao<CreditCard, 
     	openCurrentSession();
 
     	List<CreditCard> results = getCurrentSession().createCriteria(CreditCard.class)
-    		    .add(Restrictions.like("cardNumber", "%"+cardNumber+"%"))
+    		    .add(Restrictions.like("cardNumber", cardNumber, MatchMode.ANYWHERE)) 
     		    .list();
+
+    	closeCurrentSession();
+
+    	return results;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CreditCard> findByCardNumberAndUser(String cardNumber, Integer userId) {
+    	openCurrentSession();
+
+    	Criteria criteria = getCurrentSession().createCriteria(CreditCard.class, "cc");
+    	criteria.createAlias("cc.user", "u", JoinType.INNER_JOIN);
+    	criteria.add(Restrictions.eq("u.id", userId));
+    	criteria.add(Restrictions.ilike("cardNumber", "%"+cardNumber+"%"));
+    	List<CreditCard> results = criteria.list();
+
+    	closeCurrentSession();
+    	return results;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CreditCard> findByUser(Integer userId) {
+    	openCurrentSession();
+
+    	Criteria criteria = getCurrentSession().createCriteria(CreditCard.class, "cc");
+    	criteria.createAlias("cc.user", "u", JoinType.INNER_JOIN);
+    	criteria.add(Restrictions.eq("u.id", userId));
+    	List<CreditCard> results = criteria.list();
+   	
+    	closeCurrentSession();
     	return results;
     }
  
@@ -70,4 +103,5 @@ public class CreditCardDaoImpl extends Dao implements CreditCardDao<CreditCard, 
 
         closeCurrentSessionwithTransaction();
     }
+
 }
