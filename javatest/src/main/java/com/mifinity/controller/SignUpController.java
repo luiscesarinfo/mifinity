@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mifinity.model.User;
+import com.mifinity.model.UserRole;
 import com.mifinity.service.UserService;
 
 @WebServlet("/signup")
@@ -27,6 +28,7 @@ public class SignUpController extends HttpServlet {
 		User newUser = new User();
 		newUser.setUsername(request.getParameter("username"));
 		newUser.setPassword(request.getParameter("psw"));
+		newUser.setUserRole(UserRole.valueOf(request.getParameter("role")));
 		
 		try {
 			userService.persist(newUser);

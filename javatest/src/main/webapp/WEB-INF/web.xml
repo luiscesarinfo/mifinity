@@ -7,10 +7,6 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-  	<servlet-name>UserController</servlet-name>
-  	<servlet-class>com.mifinity.controller.UserController</servlet-class>
-  </servlet>
-  <servlet>
   	<servlet-name>CreditCardController</servlet-name>
   	<servlet-class>com.mifinity.controller.CreditCardController</servlet-class>
   </servlet>
@@ -40,6 +36,10 @@
   	<servlet-name>EditCreditCard</servlet-name>
   	<servlet-class>com.mifinity.controller.EditCreditCard</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>SignOutController</servlet-name>
+  	<servlet-class>com.mifinity.controller.SignOutController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>UserController</servlet-name>
   	<url-pattern>/UserController</url-pattern>
@@ -63,5 +63,9 @@
   <servlet-mapping>
   	<servlet-name>EditCreditCard</servlet-name>
   	<url-pattern>/EditCreditCard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SignOutController</servlet-name>
+  	<url-pattern>/SignOutController</url-pattern>
   </servlet-mapping>
 </web-app>

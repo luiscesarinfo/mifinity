@@ -1,16 +1,16 @@
 package com.mifinity.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mifinity.service.CreditCardService;
 
 @WebServlet(name="deletecard", urlPatterns="/deletecard")
-public class DeleteCreditCard extends HttpServlet {
+public class DeleteCreditCard extends Controller {
        
 	private static final long serialVersionUID = -2772676346542908819L;
 

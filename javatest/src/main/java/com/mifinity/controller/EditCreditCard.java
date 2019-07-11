@@ -1,9 +1,9 @@
 package com.mifinity.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,7 +11,7 @@ import com.mifinity.model.CreditCard;
 import com.mifinity.service.CreditCardService;
 
 @WebServlet(name="editcard", urlPatterns="/editcard")
-public class EditCreditCard extends HttpServlet {
+public class EditCreditCard extends Controller {
        
 	private static final long serialVersionUID = 4537986135617971369L;
 

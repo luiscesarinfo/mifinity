@@ -34,6 +34,8 @@ public class LoginController extends HttpServlet {
 			if (authUser == null) {
 				response.sendRedirect("/javatest/login/index.html?r=notfound");
 			} else {
+				request.getSession(true).setAttribute("currentUser", authUser);
+
 				RequestDispatcher view = request.getRequestDispatcher("/creditcardlist");
 				view.forward(request, response);  				
 			}

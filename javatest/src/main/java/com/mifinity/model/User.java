@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -19,7 +21,9 @@ public class User implements Serializable {
 	private String username;
 	@Column
 	private String password;
-
+	@Enumerated(EnumType.STRING)
+	private UserRole userRole;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -38,5 +42,10 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public UserRole getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
+	}
 }

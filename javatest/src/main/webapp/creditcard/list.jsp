@@ -52,6 +52,11 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #f44336;
 }
 
+.signoutbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #2196F3;
+}
 
 button {
   background-color: #4CAF50;
@@ -71,6 +76,10 @@ button:hover {
 <body>
 
 <h2>Credit Card list</h2>
+ <div style="background-color:#f1f1f1">
+   <button type="button" class="signoutbtn" onclick="window.location='/javatest/signout/';">Sign Out</button>
+ </div>
+
 
 <button type="button" class="newbtn" onclick="window.location='/javatest/creditcard/card.jsp';">New Credit Card</button>
 <input type="number" id="searchbox" name="searchbox" placeholder="Enter part or the whole number of the credit card" min="0" onKeyPress="if(this.value.length==16) return false;">

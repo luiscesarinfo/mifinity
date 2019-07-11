@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +15,7 @@ import com.mifinity.model.CreditCard;
 import com.mifinity.service.CreditCardService;
 
 @WebServlet(name="creditcardlist", urlPatterns="/creditcardlist")
-public class CreditCardListController extends HttpServlet {
+public class CreditCardListController extends Controller {
 
 	private static final long serialVersionUID = 6554574018270711650L;
 
