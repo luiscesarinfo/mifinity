@@ -5,20 +5,20 @@ You will be able to select the user role (ADMIN/ORDINARY). After creating an use
 
 Technical details:
 
-Java v1.8 
-Maven v3.5.3 
-Apache-tomcat v9.0.21
+Java v1.8;
+Maven v3.5.3;
+Apache-tomcat v9.0.21;
 
 Back-end frameworks: 
   Hibernate v5.4.3 
     Configuration: 
-    - src/main/resources/hibernate.cfg.xml 
-    - src/main/java/com.mifinity.util.HibernateUtil.java
+    - src/main/resources/hibernate.cfg.xml;
+    - src/main/java/com.mifinity.util.HibernateUtil.java;
 
 UI: 
-  Javascript 
-  Servlet v4.0.1 
-  JSTL v1.2
+  Javascript;
+  Servlet v4.0.1;
+  JSTL v1.2;
 
 Database: 
-  H2database v1.4.194
+  H2database v1.4.194;
