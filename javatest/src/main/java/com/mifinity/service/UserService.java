@@ -2,7 +2,7 @@ package com.mifinity.service;
 
 import java.util.List;
 
-import com.mifinity.dao.UserDaoImpl;
+import com.mifinity.dao.impl.UserDaoImpl;
 import com.mifinity.model.User;
 
 public class UserService {
@@ -14,42 +14,30 @@ public class UserService {
     }
  
     public void persist(User entity) {
-        dao.openCurrentSessionwithTransaction();
         dao.persist(entity);
-        dao.closeCurrentSessionwithTransaction();
     }
  
     public void update(User entity) {
-        dao.openCurrentSessionwithTransaction();
         dao.update(entity);
-        dao.closeCurrentSessionwithTransaction();
     }
  
-    public User findById(String id) {
-        dao.openCurrentSession();
-        User book = dao.findById(id);
-        dao.closeCurrentSession();
-        return book;
+    public User findById(Long id) {
+        User user = dao.findById(id);
+        return user;
     }
  
-    public void delete(String id) {
-        dao.openCurrentSessionwithTransaction();
-        User book = dao.findById(id);
-        dao.delete(book);
-        dao.closeCurrentSessionwithTransaction();
+    public void delete(Long id) {
+        User user = dao.findById(id);
+        dao.delete(user);
     }
  
     public List<User> findAll() {
-        dao.openCurrentSession();
-        List<User> books = dao.findAll();
-        dao.closeCurrentSession();
-        return books;
+        List<User> users = dao.findAll();
+        return users;
     }
  
     public void deleteAll() {
-        dao.openCurrentSessionwithTransaction();
         dao.deleteAll();
-        dao.closeCurrentSessionwithTransaction();
     }
  
     public UserDaoImpl userDaoImpl() {

@@ -1,27 +1,35 @@
-package com.mifinity.dao;
+package com.mifinity.dao.impl;
 
 import java.util.List;
 
 import org.hibernate.query.Query;
 
+import com.mifinity.dao.UserDao;
 import com.mifinity.model.User;
 
-public class UserDaoImpl extends Dao implements UserDao<User, String> {
+public class UserDaoImpl extends Dao implements UserDao<User, Long> {
 	 
     public UserDaoImpl() {
     	super();
     }
  
     public void persist(User entity) {
+        openCurrentSessionwithTransaction();
         getCurrentSession().save(entity);
+        closeCurrentSessionwithTransaction();
     }
  
     public void update(User entity) {
+        openCurrentSessionwithTransaction();
         getCurrentSession().update(entity);
+        closeCurrentSessionwithTransaction();
     }
  
-    public User findById(String id) {
+    public User findById(Long id) {
+        openCurrentSession();
         User user = (User) getCurrentSession().get(User.class, id);
+        closeCurrentSession();
+
         return user; 
     }
 
@@ -36,19 +44,28 @@ public class UserDaoImpl extends Dao implements UserDao<User, String> {
     }
  
     public void delete(User entity) {
+        openCurrentSessionwithTransaction();
         getCurrentSession().delete(entity);
+        closeCurrentSessionwithTransaction();
     }
  
     @SuppressWarnings("unchecked")
     public List<User> findAll() {
+        openCurrentSession();
         List<User> users = (List<User>) getCurrentSession().createQuery("from User").list();
+        closeCurrentSession();
+
         return users;
     }
  
     public void deleteAll() {
+        openCurrentSessionwithTransaction();
+
         List<User> entityList = findAll();
         for (User entity : entityList) {
             delete(entity);
         }
+
+        closeCurrentSessionwithTransaction();
     }
 }

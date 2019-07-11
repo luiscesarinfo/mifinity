@@ -1,4 +1,4 @@
-package com.mifinity.dao;
+package com.mifinity.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,27 +11,15 @@ public class Dao {
     private Transaction currentTransaction;
 
     public Session openCurrentSession() {
-        //currentSession = getSessionFactory().openSession();
         currentSession = HibernateUtil.getSessionFactory().openSession();
         return currentSession;
     }
  
     public Session openCurrentSessionwithTransaction() {
-        //currentSession = getSessionFactory().openSession();
         currentSession = HibernateUtil.getSessionFactory().openSession();
         currentTransaction = currentSession.beginTransaction();
         return currentSession;
     }
-
-/*
-    private static SessionFactory getSessionFactory() {
-        Configuration configuration = new Configuration().configure();
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties());
-        SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-        return sessionFactory;
-    }
- */
 
     public void closeCurrentSession() {
         currentSession.close();

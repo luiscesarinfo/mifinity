@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html>
 <head>
@@ -20,19 +20,24 @@ tr:nth-child(even) {
 }
 
 /* Full-width input fields */
-input[type=text] {
+input[type=number] {
   width: 25%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
-  
 }
 
-input[type=text]:focus {
+input[type=number]:focus {
   background-color: #ddd;
   outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 .newbtn, .searchbtn {
@@ -67,8 +72,8 @@ button:hover {
 
 <h2>Credit Card list</h2>
 
-<button type="button" class="newbtn" onclick="window.location='/javatest/creditcard/';">New Credit Card</button>
-<input type="text" id="searchbox" placeholder="Enter part or the whole number of the credit card"></input>
+<button type="button" class="newbtn" onclick="window.location='/javatest/creditcard/card.jsp';">New Credit Card</button>
+<input type="number" id="searchbox" name="searchbox" placeholder="Enter part or the whole number of the credit card" min="0" onKeyPress="if(this.value.length==16) return false;">
 <button type="button" class="searchbtn" onclick="search();">Search</button>
 
 <table>
@@ -87,8 +92,8 @@ button:hover {
         <td>${card.cardNumber}</td>
         <td>${card.expiryDate}</td>
         <td>
-			<button type="button" class="editbtn" onclick="">Edit</button>
-			<button type="button" class="deletebtn" onclick="">Delete</button>
+			<button type="button" class="editbtn" onclick="edit(${card.id})">Edit</button>
+			<button type="button" class="deletebtn" onclick="deleteCard(${card.id})">Delete</button>
         </td>
       </tr>
     </c:forEach>  
@@ -98,7 +103,15 @@ button:hover {
 </body>
 <script>
 function search() {
-	window.location='/javatest/creditcardlist?search='+ document.getElementById("searchbox").value
+	window.location='/javatest/creditcardlist?search='+ document.getElementById("searchbox").value;
+}
+
+function deleteCard(id) {
+	window.location='/javatest/deletecard?id='+ id;
+}
+
+function edit(id) {
+	window.location='/javatest/editcard?id='+ id;
 }
 </script>
 </html>

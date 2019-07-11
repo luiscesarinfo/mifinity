@@ -2,12 +2,13 @@ package com.mifinity.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.mifinity.model.CreditCard;
 import com.mifinity.service.CreditCardService;
@@ -26,16 +27,22 @@ public class CreditCardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CreditCard creditCard = new CreditCard();
+		Long cardId = StringUtils.isEmpty(request.getParameter("id")) ? null : Long.parseLong(request.getParameter("id"));
+		creditCard.setId(cardId);
 		creditCard.setCardHolder(request.getParameter("cardholder"));
 		creditCard.setCardNumber(request.getParameter("cardnumber"));
 		creditCard.setExpiryDate(request.getParameter("expirydate"));
 		
 		try {
-			service.persist(creditCard);
+			if (cardId == null) {
+				service.persist(creditCard);
+			} else {
+				service.update(creditCard);
+			}
 
 			response.sendRedirect(request.getContextPath()+ "/creditcardlist");
 		} catch (Exception e) {
-			response.sendRedirect("/javatest/creditcard/index.html?r=fail");
+			response.sendRedirect("/javatest/creditcard/card.jsp?r=fail");
 		}
 	}
 

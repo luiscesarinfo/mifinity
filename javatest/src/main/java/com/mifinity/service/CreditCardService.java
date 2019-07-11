@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.mifinity.dao.CreditCardDaoImpl;
+import com.mifinity.dao.impl.CreditCardDaoImpl;
 import com.mifinity.model.CreditCard;
 
 public class CreditCardService {
@@ -24,10 +24,18 @@ public class CreditCardService {
     }
  
     private void validateData(CreditCard entity) throws Exception {
-    	if (!NumberUtils.isDigits(entity.getCardNumber()) || isInvalidExpityDate(entity.getExpiryDate())) {
+    	if (isInvalidCardNumber(entity.getCardNumber()) || isInvalidExpityDate(entity.getExpiryDate())) {
     		throw new Exception("Invalid data.");
     	}
 	}
+
+    private boolean isInvalidCardNumber(String cardNumber) {
+    	if (!NumberUtils.isDigits(cardNumber) || cardNumber.length() < 16 || cardNumber.length() > 16) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
 
 	private boolean isInvalidExpityDate(String expiryDate) {
 		if (StringUtils.isEmpty(expiryDate)) {
@@ -55,12 +63,12 @@ public class CreditCardService {
     	dao.update(entity);
     }
  
-    public CreditCard findById(String id) {
+    public CreditCard findById(Long id) {
         CreditCard card = dao.findById(id);
         return card;
     }
  
-    public void delete(String id) {
+    public void delete(Long id) {
         CreditCard card = dao.findById(id);
         dao.delete(card);
     }
@@ -70,8 +78,8 @@ public class CreditCardService {
         return cards;
     }
  
-    public List<CreditCard> findByCreditCardNumber() {
-    	List<CreditCard> cards = dao.findAll();
+    public List<CreditCard> findByCardNumber(String cardNumber) {
+    	List<CreditCard> cards = dao.findByCardNumber(cardNumber);
     	return cards;
     }
 

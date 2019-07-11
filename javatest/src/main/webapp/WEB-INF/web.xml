@@ -26,6 +26,20 @@
   	<servlet-name>CreditCardListController</servlet-name>
   	<servlet-class>com.mifinity.controller.CreditCardListController</servlet-class>
   </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>DeleteCreditCard</display-name>
+  	<servlet-name>DeleteCreditCard</servlet-name>
+  	<servlet-class>com.mifinity.controller.DeleteCreditCard</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>EditCreditCard</display-name>
+  	<servlet-name>EditCreditCard</servlet-name>
+  	<servlet-class>com.mifinity.controller.EditCreditCard</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>UserController</servlet-name>
   	<url-pattern>/UserController</url-pattern>
@@ -41,5 +55,13 @@
   <servlet-mapping>
   	<servlet-name>CreditCardListController</servlet-name>
   	<url-pattern>/CreditCardListController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteCreditCard</servlet-name>
+  	<url-pattern>/DeleteCreditCard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EditCreditCard</servlet-name>
+  	<url-pattern>/EditCreditCard</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -17,6 +17,8 @@ public class CreditCard {
 	private String cardNumber;
 	@Column
 	private String expiryDate;
+	@Column
+	private User user;
 
 	public Long getId() {
 		return id;
@@ -42,5 +44,10 @@ public class CreditCard {
 	public void setExpiryDate(String expiryDate) {
 		this.expiryDate = expiryDate;
 	}
-	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body {
   font-family: Arial;
@@ -44,6 +45,13 @@ body {
   border-radius: 3px;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number],
 input[type=text] {
   width: 100%;
   margin-bottom: 20px;
@@ -102,12 +110,13 @@ hr {
 		<div id="msg"></div>      
         <div class="row">
           <div class="col-50">
+          	<input type="hidden" id="id" name="id" value="${card.id }">
             <label for="cardholder">Cardholder</label>
-            <input type="text" id="cardholder" name="cardholder" placeholder="John More Doe" maxlength="60" required>
+            <input type="text" id="cardholder" name="cardholder" placeholder="John More Doe" value="${card.cardHolder }" maxlength="60" required>
             <label for="cardnumber">Credit card number</label>
-            <input type="text" id="cardnumber" name="cardnumber" placeholder="1111 2222 3333 4444" minlength="16" maxlength="16" required>
+            <input type="number" id="cardnumber" name="cardnumber" placeholder="1111 2222 3333 4444" value="${card.cardNumber }" min="0" onKeyPress="if(this.value.length==16) return false;" required>
             <label for="expirydate">Expiry Date</label>
-            <input type="text" id="expirydate" name="expirydate" placeholder="YY/MM" minlength="5" maxlength="5" required>
+            <input type="text" id="expirydate" name="expirydate" placeholder="YY/MM" minlength="5" value="${card.expiryDate }" maxlength="5" required>
           </div>
           
         </div>

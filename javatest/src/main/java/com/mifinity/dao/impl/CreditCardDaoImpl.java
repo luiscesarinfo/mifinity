@@ -1,14 +1,14 @@
-package com.mifinity.dao;
+package com.mifinity.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.query.Query;
+import org.hibernate.criterion.Restrictions;
 
+import com.mifinity.dao.CreditCardDao;
 import com.mifinity.model.CreditCard;
-import com.mifinity.model.User;
 
 
-public class CreditCardDaoImpl extends Dao implements CreditCardDao<CreditCard, String> {
+public class CreditCardDaoImpl extends Dao implements CreditCardDao<CreditCard, Long> {
 	 
     public CreditCardDaoImpl() {
     	super();
@@ -27,7 +27,7 @@ public class CreditCardDaoImpl extends Dao implements CreditCardDao<CreditCard, 
 
     }
  
-    public CreditCard findById(String id) {
+    public CreditCard findById(Long id) {
         openCurrentSession();
         CreditCard creditCard = (CreditCard) getCurrentSession().get(CreditCard.class, id);
         closeCurrentSession();
@@ -50,19 +50,14 @@ public class CreditCardDaoImpl extends Dao implements CreditCardDao<CreditCard, 
         return creditCards;
     }
 
-    public List<CreditCard> findByCardNumber() {
+    @SuppressWarnings("unchecked")
+    public List<CreditCard> findByCardNumber(String cardNumber) {
     	openCurrentSession();
-		Query<User> query= getCurrentSession().createQuery("from CreditCard where cardnumber ilike :username and password=:password");
-    	query.setParameter("username", user.getUsername());
-    	query.setParameter("password", user.getPassword());
-    	User u = (User) query.uniqueResult();
-    	
-    	return u; 
-    	
-    	List<CreditCard> creditCards = (List<CreditCard>) getCurrentSession().createQuery("from CreditCard").list();
-    	closeCurrentSession();
-    	
-    	return creditCards;
+
+    	List<CreditCard> results = getCurrentSession().createCriteria(CreditCard.class)
+    		    .add(Restrictions.like("cardNumber", "%"+cardNumber+"%"))
+    		    .list();
+    	return results;
     }
  
     public void deleteAll() {
